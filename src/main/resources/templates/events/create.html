@@ -1,14 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
-
-<header th:replace="fragments :: header"></header>
+<body class="container">
+<h1>Coding Events</h1>
+<header th:replace ="fragments :: header"></header>
 
 <form method="post">
-    <input type="text" name="eventName">
-    <input type="submit" value="Create">
+    <div class="form-group">
+        <label>Name
+            <input th:field="${event.name}"  class="form-control">
+        </label>
+        <p class="errors" th:errors="${event.name}"></p>
+        <label>Description
+            <input th:field="${event.description}" class="form-control">
+        </label>
+        <p class="errors" th:errors="${event.description}"></p>
+        <label>Contact Email
+            <input th:field="${event.contactEmail}" class="form-control">
+        </label>
+        <p class="errors" th:errors="${event.contactEmail}"></p>
+    </div>
+
+        <div class="form-group">
+            <label>Type
+                <select th:field="${event.type}">
+                    <option th:each="type : ${types}"
+                            th:value="${type}"
+                            th:text="${type.displayName}"
+                    ></option>
+                </select>
+            </label>
+        </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
 </form>
+
 
 </body>
 </html>
